@@ -1,81 +1,128 @@
-P2P Chat with Registration and Bridging
+<h1>P2P Chat with Registration and Bridging</h1>
 
-This repository contains a minimal peer-to-peer chat prototype that uses a central server for registration and bridging, then lets clients connect directly to each other for real-time text chat. It demonstrates key socket programming and basic protocol concepts, inspired by typical assignments in networking classes.
-Overview
+<p>This repository contains a minimal <strong>peer-to-peer chat</strong> prototype that uses a <strong>central server</strong> for registration and bridging, then lets clients connect <strong>directly</strong> to each other for real-time text chat. It demonstrates key <strong>socket programming</strong> and basic <strong>protocol</strong> concepts, inspired by typical assignments in networking classes.</p>
 
-    Server (server.py):
-        Maintains a list of connected clients (client ID, IP, port).
-        Accepts REGISTER, BRIDGE, and INFO requests from clients.
-        Provides bridging info (IP and port) of another client so a direct, peer-to-peer chat can be established.
+---
 
-    Client (client.py):
-        Registers itself with the server using /register.
-        Requests another client’s IP/port using /bridge.
-        Opens a listening socket to accept inbound connections.
-        Can initiate an outbound connection to another client, sending and receiving chat messages directly over TCP.
+<h2>Overview</h2>
 
-Goal
+<ul>
+    <li><strong>Server</strong> (<code>server.py</code>):
+        <ul>
+            <li>Maintains a list of connected clients (client ID, IP, port).</li>
+            <li>Accepts <code>REGISTER</code>, <code>BRIDGE</code>, and <code>INFO</code> requests from clients.</li>
+            <li>Provides bridging info (IP and port) of another client so a direct, peer-to-peer chat can be established.</li>
+        </ul>
+    </li>
+    <li><strong>Client</strong> (<code>client.py</code>):
+        <ul>
+            <li>Registers itself with the server using <code>/register</code>.</li>
+            <li>Requests another client’s IP/port using <code>/bridge</code>.</li>
+            <li>Opens a <strong>listening socket</strong> to accept inbound connections.</li>
+            <li>Can initiate an <strong>outbound</strong> connection to another client, sending and receiving chat messages directly over TCP.</li>
+        </ul>
+    </li>
+</ul>
 
-    Educational Objective:
-        Practice socket programming in Python.
-        Explore the basic idea of how protocols like SIP (Session Initiation Protocol) can “introduce” endpoints for direct communication.
-        Understand multi-threaded or event-based designs necessary for real-time, two-way data exchange.
+---
 
-Instructions
+<h2>Goal</h2>
 
-    Setup
-        Install Python 3 on your system.
-        Clone this repository or download the server.py and client.py files.
+<ul>
+    <li><strong>Educational Objective:</strong></li>
+    <ul>
+        <li>Practice socket programming in Python.</li>
+        <li>Explore how protocols like SIP (Session Initiation Protocol) introduce endpoints for direct communication.</li>
+        <li>Understand multi-threaded designs necessary for real-time, two-way data exchange.</li>
+    </ul>
+</ul>
 
-    Run the Server
-        In one terminal (e.g., PowerShell), run:
+---
 
-    python server.py
+<h2>Instructions</h2>
 
-    The server listens on 127.0.0.1:5555 by default.
+<h3>1. Setup</h3>
+<ul>
+    <li>Install <strong>Python 3</strong> on your system.</li>
+    <li>Clone this repository or download the <code>server.py</code> and <code>client.py</code> files.</li>
+</ul>
 
-Run a Client
+<h3>2. Run the Server</h3>
+<pre><code>python server.py</code></pre>
+<p>The server listens on <code>127.0.0.1:5555</code> by default.</p>
 
-    Open another terminal and run:
+<h3>3. Run a Client</h3>
+<pre><code>python client.py &lt;clientID&gt; &lt;listenPort&gt; 127.0.0.1:5555</code></pre>
+<p>Example:</p>
+<pre><code>python client.py alice 5556 127.0.0.1:5555</code></pre>
 
-python client.py <clientID> <listenPort> 127.0.0.1:5555
+<h3>4. Commands</h3>
 
-For example:
+<table>
+    <thead>
+        <tr>
+            <th>Command</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>/register</code></td><td>Registers this client with the server.</td></tr>
+        <tr><td><code>/info</code></td><td>Requests a list of all known clients.</td></tr>
+        <tr><td><code>/bridge</code></td><td>Requests another client's IP/Port for direct connection.</td></tr>
+        <tr><td><code>/chat IP:PORT</code></td><td>Connects directly to a peer’s chat socket.</td></tr>
+        <tr><td><code>/msg &lt;text&gt;</code></td><td>Sends a text message to the connected peer.</td></tr>
+        <tr><td><code>/quit</code></td><td>Closes the client.</td></tr>
+    </tbody>
+</table>
 
-    python client.py alice 5556 127.0.0.1:5555
+<h3>5. Running Multiple Clients</h3>
+<ul>
+    <li>Run another client in a new terminal:</li>
+</ul>
 
-    The client starts listening on 127.0.0.1:<listenPort> for inbound chat connections.
+<pre><code>python client.py bob 5557 127.0.0.1:5555</code></pre>
 
-Commands (enter in the client’s console):
+---
 
-    /register
-    Register with the server (sends client ID and listening port).
-    /info
-    Ask the server to list all known clients.
-    /bridge
-    Request another client’s IP/Port from the server (if available).
-    /chat IP:PORT
-    Connect directly (outbound) to a peer’s IP/port for chat.
-    /msg <message>
-    Send a text message to the currently connected peer.
-    /quit
-    Quit the client application.
+<h2>Example Usage Flow</h2>
 
-Try Multiple Clients
+<ol>
+    <li><strong>On Client A (Alice):</strong> Register with the server.</li>
+    <pre><code>/register</code></pre>
 
-    In separate terminals, run:
+    <li><strong>On Client B (Bob):</strong> Register as well.</li>
+    <pre><code>/register</code></pre>
 
-        python client.py bob 5557 127.0.0.1:5555
-        python client.py carol 5558 127.0.0.1:5555
-        ...
+    <li><strong>On Client A:</strong> Request another client’s info.</li>
+    <pre><code>/bridge</code></pre>
 
-        Each can /register, then use /bridge to find a peer, then /chat <peerIP>:<peerPort> to connect directly.
+    <li><strong>On Client A:</strong> Connect to Bob.</li>
+    <pre><code>/chat 127.0.0.1:5557</code></pre>
 
-Learning Outcomes
+    <li><strong>On Client A:</strong> Send a message.</li>
+    <pre><code>/msg Hello Bob!</code></pre>
 
-    Socket Programming: Gained experience with both server and client TCP sockets in Python.
-    Multi-Threading: Demonstrated separate threads for listening and sending, avoiding blocking console issues on Windows.
-    Custom Protocol Concepts: Implemented minimal message headers (REGISTER, BRIDGE, INFO, etc.) to control session establishment and bridging.
-    P2P vs. Centralized: Showed how a lightweight server can facilitate direct client-to-client connections (a simplified model of SIP and similar protocols).
+    <li><strong>On Client B:</strong> Receives and sees the message.</li>
+</ol>
 
-This project is a straightforward example of how clients can register with a central directory service and then communicate peer-to-peer once they receive each other’s contact info, all while respecting Windows’ console I/O limitations
+---
+
+<h2>Quitting</h2>
+<ul>
+    <li><strong>Client:</strong> Type <code>/quit</code> at the prompt.</li>
+    <li><strong>Server:</strong> Press <code>CTRL + C</code> in the terminal.</li>
+</ul>
+
+---
+
+<h2>Learning Outcomes</h2>
+
+<ul>
+    <li><strong>Socket Programming:</strong> Experience with both <strong>server</strong> and <strong>client</strong> TCP sockets in Python.</li>
+    <li><strong>Multi-Threading:</strong> Used separate threads for listening and sending, avoiding Windows console issues.</li>
+    <li><strong>Protocol Design:</strong> Implemented custom message headers (<code>REGISTER</code>, <code>BRIDGE</code>, <code>INFO</code>) to establish communication.</li>
+    <li><strong>P2P Communication:</strong> Demonstrated how a server can facilitate direct peer-to-peer chat.</li>
+</ul>
+
+<p>This project serves as a simple demonstration of how clients can <strong>register</strong> with a central service and then <strong>connect peer-to-peer</strong> using minimal protocol logic.</p>
+
