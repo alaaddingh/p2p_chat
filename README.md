@@ -86,10 +86,9 @@
 
 <h2>Example Usage Flow</h2>
     <strong>On Client A (Alice):</strong> Register with the server.
-    <pre><code>/register</code></pre>
-
+    <code>/register</code>
     <strong>On Client B (Bob):</strong> Register as well.
-    <pre><code>/register</code></pre>
+    <code>/register</code>
 
     <strong>On Client A:</strong> Request another client’s info.
     <pre><code>/bridge</code></pre>
