@@ -87,20 +87,20 @@
 <h2>Example Usage Flow</h2>
     <strong>On Client A (Alice):</strong> Register with the server.
     <code>/register</code>
+    <br>
     <strong>On Client B (Bob):</strong> Register as well.
     <code>/register</code>
-
+    <br>
     <strong>On Client A:</strong> Request another client’s info.
-    <pre><code>/bridge</code></pre>
-
+    <code>/bridge</code>
+    <br>
     <strong>On Client A:</strong> Connect to Bob.
-    <pre><code>/chat 127.0.0.1:5557</code></pre>
-
+    <code>/chat 127.0.0.1:5557</code>
+    <br>
     <strong>On Client A:</strong> Send a message.
-    <pre><code>/msg Hello Bob!</code></pre>
-
+    <code>/msg Hello Bob!</code>
+   <br>
    <strong>On Client B:</strong> Receives and sees the message.
-
 ---
 
 <h2>Quitting</h2>
