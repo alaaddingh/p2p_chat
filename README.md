@@ -1,6 +1,5 @@
 <h1>P2P Chat with Registration and Bridging</h1>
-
-<p>This repository contains a minimal <strong>peer-to-peer chat</strong> prototype that uses a <strong>central server</strong> for registration and bridging, then lets clients connect <strong>directly</strong> to each other for real-time text chat. It demonstrates key <strong>socket programming</strong> and basic <strong>protocol</strong> concepts, inspired by typical assignments in networking classes.</p>
+<p>This repository contains a minimal peer-to-peer chat program that uses a central serverfor registration and bridging, then lets clients connect directly to each other for real-time text chat. The goal of this project was to learn about socket programming and basic protocol concepts, and was completed during my Introduction To Networking course.</p>
 
 ---
 
