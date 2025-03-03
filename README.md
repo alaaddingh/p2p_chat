@@ -25,14 +25,15 @@
 
 ---
 
-<h2>Goal</h2>
+<h2>Goals</h2>
 
 <ul>
     <li><strong>Educational Objective:</strong></li>
     <ul>
         <li>Practice socket programming in Python.</li>
-        <li>Explore how protocols like SIP (Session Initiation Protocol) introduce endpoints for direct communication.</li>
+        <li>Explore how protocols introduce endpoints for direct communication.</li>
         <li>Understand multi-threaded designs necessary for real-time, two-way data exchange.</li>
+        <li>To have fun! :)</li>
     </ul>
 </ul>
 
