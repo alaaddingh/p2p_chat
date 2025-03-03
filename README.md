@@ -86,7 +86,7 @@
 
 <h2>Example Usage Flow</h2>
 
-<ol>
+<ul>
     <li><strong>On Client A (Alice):</strong> Register with the server.</li>
     <pre><code>/register</code></pre>
 
@@ -103,7 +103,7 @@
     <pre><code>/msg Hello Bob!</code></pre>
 
     <li><strong>On Client B:</strong> Receives and sees the message.</li>
-</ol>
+</ul>
 
 ---
 
